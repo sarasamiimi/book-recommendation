@@ -1,0 +1,101 @@
+<!-- recommendations/templates/recommendations/index.html -->
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendations</title>
+   
+</head>
+<style>
+
+
+body{
+    margin: 0;
+    padding: 0;
+    background: rgba(46, 154, 243, 0.584);
+}
+
+
+    .container{
+        
+        display: flex;
+        justify-content:center ;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+    }
+
+    button{
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        background-color: rgb(232, 96, 22);
+        border: none;
+        font-weight: bolder;
+        transition-duration: 0.5s;
+
+    }
+    button:hover{
+        background-color: beige;
+
+    }
+
+    #id_book_title{
+        border: none;
+        border-radius: 5px;
+        height: 30px;
+        width: 200px;
+        background-color: rgba(255, 255, 255, 0.765);
+
+    }
+
+    label{
+        font-size: large;
+        font-weight: bold;
+
+
+    }
+
+    ul{
+        border: 0.1px solid rgba(213, 211, 211, 0.347);
+        padding: 10px;
+    }
+
+ li{
+      list-style: none;
+      padding: 10px;
+     border: 0.1px solid rgba(217, 17, 217, 0.347);
+     margin-top: 30px;
+ }
+</style>
+<body>
+    <div class="container">
+        <h2>Welcome to the book recommendation system</h2>
+        <form method="post">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">click</button>
+            
+        </form>
+
+        {% if recommendations %}
+            <h3>Suggested books:</h3>
+            <ul>
+            {% for book in recommendations %}
+                <li>{{ book.title }} - {{ book.author }}</li>
+                
+            
+            {% endfor %}
+            </ul>
+            {% else %}
+                <li>No book found, database is not complate but for example you can try The Missing Person to see how system work.</li>
+        {% endif %}
+    </div>
+</body>
+</html>
+
